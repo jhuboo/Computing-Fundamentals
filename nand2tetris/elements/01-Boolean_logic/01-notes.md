@@ -9,7 +9,7 @@ Boolean algebra deals with true/false, on/off, 1/0 and so on.
 Every Boolean function, no matter how complex, can be expressed
 using three Boolean operators only: And, Or, Not.
 
-######Boolean Expression
+###### Boolean Expression
 - "And" : xy or x.y means x And y
 - "Or"  : x + y means x Or y
 - "Not" : !x means Not x
@@ -19,7 +19,7 @@ using three Boolean operators only: And, Or, Not.
 "God gave us the Nand Gate, the rest is down to people..."
 
 | a | b | Nand(a,b) |
-|---|---|-----------|
+|---|---|   :--:    |
 | 0 | 0 |     1     |
 | 0 | 1 |     1     |
 | 1 | 0 |     1     |
