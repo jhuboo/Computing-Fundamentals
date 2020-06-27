@@ -140,4 +140,17 @@ the value *out(t) = out(t-1) + 1*
 - The reset bit is used to *reset* the counter back to its start value, which
 may be an arbitrary number n or 0.
 
+```
+    Chip name: PC       // 16-bit counter
+    Inputs   : in[16], inc, load, reset
+    Outputs  : out[16]
+    Function : If reset(t-1) then out(t) = 0
+               If  load(t-1) then out(t) = in(t-1)
+               If   inc(t-1) then out(t) = out(t-1) + 1
+                             else out(t) = out(t-1)
+```
 
+
+The abstraction present is quite incredible, we start from flip-flop gates, and
+use them for istance to build registers, which are in turn used to build RAM8,
+which is in turn used in RAM64, and so on...
