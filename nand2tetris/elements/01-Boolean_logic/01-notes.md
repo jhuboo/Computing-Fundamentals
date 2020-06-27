@@ -31,3 +31,47 @@ using three Boolean operators only: And, Or, Not.
     Outputs  : out
     Function : If a=b=1 then out=0 else out=1
 ```
+
+#### Basic Logic Gates
+
+```
+    Chip Name: Not
+    Inputs   : in
+    Outputs  : out
+    Function : If in=0 then out=1 else out=0
+```
+
+```
+    Chip Name: And
+    Inputs   : a, b
+    Outputs  : out
+    Function : If a=b=1 then out=1 else out=0
+```
+
+```
+    Chip Name: Or
+    Inputs   : a, b
+    Outputs  : out
+    Function : If a=b=0 then out=0 else out=1
+```
+
+```
+    Chip Name: Xor
+    Inputs   : a, b
+    Outputs  : out
+    Function : If a!=b then out=1 else out=0
+```
+
+```
+    Chip Name: Mux
+    Inputs   : a, b, sel
+    Outputs  : out
+    Function : If sel=0 then out=a else out=b
+```
+
+```
+    Chip Name: DMux
+    Inputs   : in, sel
+    Outputs  : a, b
+    Function : If sel=0 then {a=in, b=0} else {a=0, b=in}
+```
