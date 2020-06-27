@@ -43,3 +43,16 @@ physical location - should be able to be accessed directly in equal speed.
 - We satisfy this requiremnt by first assigning each word in the n-register RAM a *unique addresss* (0 <= addresss < n), according to which it will be accessed.
 - Second, we build a gate logic design that given an address *j*, is able to select the individaul register whose address is *j*
 
+***Counters*** are sequential chips whose state is an int number that increments
+every time unit, effecting the function ***out(t) = out(t - 1) + c***, where c
+is typically 1. Counters play an important role in digital architectures. For 
+instance, a typical CPU includes a program counter whose output is interpreted
+as the address of the instruction that should be executed next in the current
+program.
+
+***Time Matters***, all chips described here up till now are *sequential*. 
+Essentially, a *sequential* chip is one that embeds one or more *DFF* gates,
+either directly or indirectly. 
+- In combinational chips, where time is neither modelled nor recognized, the introduction of feeback loops is complicated as feeding the output would end up depending on itself.
+- In sequential chips, this is not a problem because the *DFFs* introduce an inherent time delay, meaning that the output at time t does not depend on itself, but rather on the output at t - 1.
+
