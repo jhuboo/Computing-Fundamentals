@@ -14,8 +14,8 @@ can be reduced to elementary additions of binary numbers.
 #### Binary Numbers
 
 The binary system is founded on base 2.
-Ihe binary code for the number 21 is 10101
-In a 32-bit machine, it is stored as 00000000000000000000000000010101
+- Ihe binary code for the number 21 is 10101
+- In a 32-bit machine, it is stored as 00000000000000000000000000010101
 
 #### Binary Addition
 
