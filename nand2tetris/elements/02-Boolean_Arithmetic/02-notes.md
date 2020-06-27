@@ -33,7 +33,9 @@ patterns. To represent signed numbers in binary code, we split this space
 into two equal subsets; one for positive , and one for negative numbers.
 
 Almost all computers used the *2's complement* method (aka *radix complement*)
-to represent signed numbers in binary code.
+to represent signed numbers in binary code. ('-x' is x-complement)
+
+``` -x = 2^n - x  if x != 0 else 0 ```
 
 While ```n + (-n) = 0``` for the above method,
 A quick trick is to leverage the power of -1:
