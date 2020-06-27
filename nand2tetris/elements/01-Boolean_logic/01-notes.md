@@ -75,3 +75,43 @@ using three Boolean operators only: And, Or, Not.
     Outputs  : a, b
     Function : If sel=0 then {a=in, b=0} else {a=0, b=in}
 ```
+
+#### Multi-Bit Versions of Basic Gates
+
+Computer Hardware is designed to normally operate on multi-bit arrays
+called "buses". We refer to the individual bits in a 16-bit bus named
+data as such data[0], data[1], ..., data[15]
+
+```
+    Chip Name: Not16
+    Inputs   : in[16]       // a 16-bit pin 
+    Outputs  : out[16]
+    Function : For i=0..15 out[i] = Not(in[i]) 
+```
+```
+    Chip Name: And16 
+    Inputs   : a[16], b[16] 
+    Outputs  : out[16] 
+    Function : For i=0..15 out[i] = And(a[i],b[i])
+```
+```
+    Chip Name: Or16 
+    Inputs   : a[16], b[16]
+    Outputs  : out[16] 
+    Function : For i=0..15 out[i] = Or(a[i],b[i]) 
+```
+```
+    Chip Name: Mux16 
+    Inputs   : a[16], b[16], sel
+    Outputs  : out[16] 
+    Function : If sel=0 then i=0..15 out[i] = a[i]
+                    else for i=0..15 out[i] = b[i]
+```
+
+
+```
+    Chip Name: 
+    Inputs   : 
+    Outputs  : 
+    Function : 
+```
