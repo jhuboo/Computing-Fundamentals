@@ -1,6 +1,7 @@
 ## The_C_Programming_Language
 
 Some notes from K&amp;R's books and the re-construction of some cool c-programs
+
 Also includes a walkthrough of Nand2Tetris, Building a Computer from First Principles
 
 Some C solutions were inspired from the awesome people who contributed [here at clc-wiki.net](https://clc-wiki.net/wiki/K&R2_solutions)
