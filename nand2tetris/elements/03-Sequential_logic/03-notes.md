@@ -64,3 +64,80 @@ guaranteed that by the time, the sequential chip updates its state (at the
 beginning of the next clock cycle), the input it receives from the ALU is valid.
 This synchronizes a set of stand-alone hardware components into a well-
 coordinated system.
+
+
+### Hierarchy of Sequential Chips
+- Data Filp-flops (DFFs)
+- Registers (based on DFFs)
+- Memory Banks (based on registers)
+- Counter chips (based on register too)
+
+#### DFF
+They enter the computer architecture at a very low level, since all sequential
+chips are based on numerous DFF gates. All the DFFs are connected to the same
+master clock, forming a huge distributed "chorus line". At the beginning of each
+clock cycle, the outputs of ***all*** the DFFs in the computer commit to their
+inputs during the previous time unit. This conduction operation effects any one
+of the millions of DFF gates that make up the system, about a billion times 
+per second (depending on the computer's clock frequency). Hardware implementations
+achieve this time dependency by simultaneously feeding the master clock to all
+the DFF gates in the platform.
+```
+    Chip name: DFF
+    Inputs   : In
+    Outputs  : Out
+    Function : out(t) = in(t - 1)
+```
+
+#### Registers
+A single-bit register (Bit / binary cell) is designed to store a single bit of
+information (0 or 1). 
+```
+    Chip name: Bit
+    Inputs   : in, load
+    Outputs  : out
+    Function : If load(t-1) then out(t) = in(t-1)
+                            else out(t) = out(t-1)
+```
+```
+    Chip name: Register     // Multiple-bit values
+    Inputs   : in[16], load
+    Outputs  : out[16]
+    Function : If load(t-1) then out(t) = in(t-1)
+                            else out(t) = out(t-1)  // "=" is a 16-bit operation
+```
+
+#### Memory
+A direct-access memory unit, called RAM, is an array of *n w*-bit registers, 
+equipped with direct access circuitry, where *n* = memory's *size* and *w* =
+memory's *width*. Hence, we have the hierarchy of RAM8, RAM64, RAM512, RAM4K,
+RAM16K, ... and so on.
+- Read: to read contents of register number *y*, we put y in the address input.
+The RAM's direct access logic will select register *y*, which will then emit its
+output value to the RAM's output pin. This is a combinatorial operation,
+independent of the clock.
+- Write: To write new data value *d* into the register *y*, we put *y* in the
+address input, *d* in the input, and assert the load bit input bit. This causes
+the RAM's direct-access memory to select register number *m* and the load bit
+to enable it. This is a sequential operation, as in the next clock cycle, the
+selected register will commit to the new value and the RAM's output will start
+emitting it.
+```
+    Chip name: RAMn
+    Inputs   : in[16], address[k], load
+    Outputs  : out[16]
+    Function : out(t) = RAM(address(t)](t)      // "=" is a 16-bit operation
+               If load(t-1) then RAM[address(t-1)](t) = in(t-1)
+```
+
+#### Counter
+The counter's interface is similar to that of a register, except it has two
+additional control bits label *reset* and *inc*. (One possible use case might
+be for the counter chip to contain the address of the instruction that the
+computer should fetch and execute next).
+- When inc=1, the counter increments its state in every clock cycle, emitting
+the value *out(t) = out(t-1) + 1*
+- The reset bit is used to *reset* the counter back to its start value, which
+may be an arbitrary number n or 0.
+
+
