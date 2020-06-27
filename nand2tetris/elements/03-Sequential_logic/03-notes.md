@@ -55,4 +55,12 @@ Essentially, a *sequential* chip is one that embeds one or more *DFF* gates,
 either directly or indirectly. 
 - In combinational chips, where time is neither modelled nor recognized, the introduction of feeback loops is complicated as feeding the output would end up depending on itself.
 - In sequential chips, this is not a problem because the *DFFs* introduce an inherent time delay, meaning that the output at time t does not depend on itself, but rather on the output at t - 1.
-
+This "dicretization" of the sequential chips' outputs has an important side
+effect; it can be used to synchronize the overall computer architecture. All
+we have to ensure is that when we build the computer clock, the length of the
+clock cycle will be slightly longer than the time it takes a bit to travel the 
+longest distance from one chip in the architecture to another. This way, we are
+guaranteed that by the time, the sequential chip updates its state (at the 
+beginning of the next clock cycle), the input it receives from the ALU is valid.
+This synchronizes a set of stand-alone hardware components into a well-
+coordinated system.
