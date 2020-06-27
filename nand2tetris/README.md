@@ -18,5 +18,16 @@ to this awesome book!
 - 12. Operating System
 - 13. Postscript: More Fun to Go
 
-Once upon a time, every computer specialist had a gestalt understanding
-of how computer worked...
+"Once upon a time, every computer specialist had a gestalt understanding
+of how computer worked..."
+
+| High-Level Langauge / Applications |
+| Operating System |
+| Compiler |
+| Virtual Machine |
+| Assembler |
+| Machine Language |
+| Computer Architecture |
+| ALU | Memory Elements |
+| Boolean Arithmetic | Sequential Logic |
+| Boolean Logic |
