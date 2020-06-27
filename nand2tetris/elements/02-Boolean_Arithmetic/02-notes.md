@@ -140,4 +140,5 @@ the basic arithmetic and logical operators performed in hardware.
 | 0  | 0  | 0  | 0  | 0 | 0  | x&y  |
 | 0  | 1  | 0  | 1  | 0 | 1  | x|y  |
 
-
+We here used the basic concepts of the gates (primitive operations) to
+design the ALU to be simple, and elegant.
