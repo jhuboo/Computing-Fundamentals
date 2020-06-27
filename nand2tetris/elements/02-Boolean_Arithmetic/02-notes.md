@@ -14,7 +14,7 @@ can be reduced to elementary additions of binary numbers.
 #### Binary Numbers
 
 The binary system is founded on base 2.
-- Ihe binary code for the number 21 is 10101
+- The binary code for the number 21 is 10101
 - In a 32-bit machine, it is stored as 00000000000000000000000000010101
 
 #### Binary Addition
@@ -34,3 +34,15 @@ into two equal subsets; one for positive , and one for negative numbers.
 
 Almost all computers used the *2's complement* method (aka *radix complement*)
 to represent signed numbers in binary code.
+
+While ```n + (-n) = 0``` for the above method,
+A quick trick is to leverage the power of -1:
+```
+     n + (-n - 1) = -1      // n is positive 
+     In base 4:
+        0 + -1 = 0000 + 1111 = 1111 == -1
+        1 + -2 = 0001 + 1110 = 1111 == -1
+        2 + -3 = 0010 + 1101 = 1111 == -1
+        ...
+        7 + -8 = 0111 + 1000 = 1111 == -1 
+```
