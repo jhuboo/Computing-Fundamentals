@@ -21,13 +21,13 @@ to this awesome book!
 "Once upon a time, every computer specialist had a gestalt understanding
 of how computer worked..."
 
-| High-Level Langauge / Applications |
-| Operating System |
-| Compiler |
-| Virtual Machine |
-| Assembler |
-| Machine Language |
-| Computer Architecture |
-| ALU | Memory Elements |
+| High-Level Langauge and Applications | |
+| Operating System | |
+| Compiler | |
+| Virtual Machine | |
+| Assembler | |
+| Machine Language | |
+| Computer Architecture | |
+| ALU | Memory Elements | |
 | Boolean Arithmetic | Sequential Logic |
-| Boolean Logic |
+| Boolean Logic | |
