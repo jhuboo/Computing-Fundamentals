@@ -104,14 +104,43 @@ data as such data[0], data[1], ..., data[15]
     Chip Name: Mux16 
     Inputs   : a[16], b[16], sel
     Outputs  : out[16] 
-    Function : If sel=0 then i=0..15 out[i] = a[i]
+    Function : If sel=0 for  i=0..15 out[i] = a[i]
                     else for i=0..15 out[i] = b[i]
 ```
 
+#### Multi-Way Versions of Basic Gates
 
+An *n-way* Or gate outputs 1 when at least one of its n bit inputs is 1
 ```
-    Chip Name: 
-    Inputs   : 
-    Outputs  : 
-    Function : 
+    Chip Name: Or8way
+    Inputs   : in[8] 
+    Outputs  : out 
+    Function : out = Or(in[0], in[1], ..., in[7]) 
 ```
+
+An ***m-way n-bit*** multiplexor selects one of *m n-bit* input buses
+and outputs it to a single *n*-bit output bus.
+```
+    Chip Name: Mux4Way16
+    Inputs   : a[16], b[16], c[16], d[16], sel[2] 
+    Outputs  : out[16] 
+    Function : If sel = 00, for i=0..15 then out[i] = a[i]
+                  sel = 01, for i=0..15 then out[i] = b[i]
+                  sel = 10, for i=0..15 then out[i] = c[i]
+                  sel = 11, for i=0..15 then out[i] = d[i]
+                
+```
+
+An ***m-way n-bit*** demultiplexor channels a single *n*-bit to one of *m*
+possible *n-bit* outputs.
+```
+    Chip Name: DMux4Way
+    Inputs   : in, sel[2] 
+    Outputs  : a, b, c, d 
+    Function : If sel = 00 then {a=in, b=c=d=0}
+                  sel = 01 then {b=in, a=c=d=0}
+                  sel = 10 then {c=in, a=b=d=0}
+                  sel = 11 then {d=in, a=b=c=0} 
+```
+
+
