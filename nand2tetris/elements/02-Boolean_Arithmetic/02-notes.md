@@ -44,7 +44,52 @@ A quick trick is to leverage the power of -1:
      In base 4:
         0 + -1 = 0000 + 1111 = 1111 == -1
         1 + -2 = 0001 + 1110 = 1111 == -1
-        2 + -3 = 0010 + 1101 = 1111 == -1
         ...
         7 + -8 = 0111 + 1000 = 1111 == -1 
 ```
+
+This reduces hardware complexity significantly:
+- Subtraction can be performed as x - y = x + (-y)
+
+Aha! We can see that a single chip, the ALU, can be used to encapsulate all
+the basic arithmetic and logical operators performed in hardware.
+
+
+### Specificaton
+
+#### Adders
+- Half-adder: designed to add two bits
+- Full-adder: designed to add three bits
+- Adder     : designed to add two *n-bit* numbers
+
+```
+    Chip name: HalfAdder        // designed to add two bits
+    Inputs   : a, b
+    Outputs  : sum, carry
+    Function : sum   = LSB of a + b
+               carry = MSB of a + b
+```
+
+```
+    Chip name: FullAdder
+    Inputs   : a, b, c
+    Outputs  : sum, carry
+    Function : sum   = LSB of a + b + c
+               carry = MSB of a + b + c
+```
+
+```
+    Chip name: Add16        // 16-bit adder
+    Inputs   : a[16], b[16]
+    Outputs  : out[16]
+    Function : out = a + b  // Overflow is neither detected nor handled
+```
+
+```
+    Chip name: Inc16        // Convenient to have incremeter chip to add 1
+    Inputs   : in[16]
+    Outputs  : out[16]
+    Function : out = in + 1 // Overflow is neither detected nor handled
+```
+
+### The Arithmetic Logic Unit (ALU)
