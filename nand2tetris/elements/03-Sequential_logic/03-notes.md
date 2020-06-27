@@ -40,6 +40,6 @@ derives from the requirement that read/write operations on a RAM should be able
 to access randomly chosen words, with no restrictions on the order in which
 they accessed. This means that any word in the memory - irrespetive of its 
 physical location - should be able to be accessed directly in equal speed.
-We satisfy this requiremnt by assigning each word in the n-register RAM a 
-*unique addresss* (0 <= addresss < n), according to which it will be accessed.
+- We satisfy this requiremnt by first assigning each word in the n-register RAM a *unique addresss* (0 <= addresss < n), according to which it will be accessed.
+- Second, we build a gate logic design that given an address *j*, is able to select the individaul register whose address is *j*
 
