@@ -25,7 +25,21 @@ This forms the basis of all hardware devices that computers use to maintain
 state, from binary cells, to registers to arbitrarily large RAM units.
 
 ***Registers*** are storage devices that can remember a value over time,
-implementing the classical storage *out(t) = out(t-1)*. This means that a
+implementing the classical storage ***out(t) = out(t-1)***. This means that a
 register can be implemented from a DFF by simply feeding its output back
-to its input.
+to its input. We can then extend this mechanism to construct arbitrarily
+wide registers. This can be done by forming an array of many single-bit
+registers as needed, creating a register that holds multi-bit values. The basic
+design paramter is usually the *width* which is usually 32 or 64. The multi-bit
+contents of such registers are typically refered to as *words*.
+
+***Memories***, once we have the basic abiity to represent words, we can proceed
+to build memory banks of arbitrary length. This can be done by stacking together
+many registers to form a ***Random Access Memory (RAM)*** unit. The term *RAM*
+derives from the requirement that read/write operations on a RAM should be able
+to access randomly chosen words, with no restrictions on the order in which
+they accessed. This means that any word in the memory - irrespetive of its 
+physical location - should be able to be accessed directly in equal speed.
+We satisfy this requiremnt by assigning each word in the n-register RAM a 
+*unique addresss* (0 <= addresss < n), according to which it will be accessed.
 
