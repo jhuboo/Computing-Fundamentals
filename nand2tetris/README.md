@@ -30,6 +30,6 @@ of how computer worked..."
 | Assembler |
 | Machine Language |
 | Computer Architecture |
-| ALU | Memory Elements |
-| Boolean Arithmetic | Sequential Logic |
+| ALU \| Memory Elements |
+| Boolean Arithmetic \| Sequential Logic |
 | Boolean Logic |
