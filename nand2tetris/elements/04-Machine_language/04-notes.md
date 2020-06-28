@@ -119,11 +119,38 @@ executing a previous command.
 
 
 ### C vs Machine Language
-``` Adds 1+2+...+100
+```
+    //  Adds 1+2+...+100 in C
     int i = 1;
     int sum = 0;
     while (i <= 100) {
         sum += i;
         i++;
     }
+```
+
+```
+    // Adds 1+2+...+100 in Machine Language (Hack version)
+        @i      // i refers to some memory location
+        M=1     // i=1
+        @sum    // sum refers to some memory location
+        M=0     // sum=0
+    (LOOP)
+        @i
+        D=M     // D=i (at start of loop, this is *1*)
+        @100
+        D=D-A   // D=i-100 (Use A-instruc to enter constant under program control)
+        @END
+        D;JGT   // If (i-100)>0 goto END
+        @i
+        D=M     // D=i
+        @sum
+        M=D+M   // sum=sum+i
+        @i
+        M=M+1   // i=i+1
+        @LOOP
+        0;JMP   // Goto LOOP
+    (END)
+        @END
+        0;JMP   // Infinite Loop (Way to terminate program in Hack ML)
 ```
