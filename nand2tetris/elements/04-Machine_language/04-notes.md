@@ -116,3 +116,14 @@ the address of the target location.
 specify a Boolean condition expressed in some way. In some languages, the
 condition is an explicit part of the command, and in others it is a by-product of
 executing a previous command.
+
+
+### C vs Machine Language
+``` Adds 1+2+...+100
+    int i = 1;
+    int sum = 0;
+    while (i <= 100) {
+        sum += i;
+        i++;
+    }
+```
