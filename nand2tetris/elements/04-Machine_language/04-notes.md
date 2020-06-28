@@ -78,3 +78,34 @@ bit shifting, and so forth.
 ```
 
 #### Memory Access
+Memory access commands fall into two categories:
+- First as we have seen, arithmeitc and logical commands are allowed to
+opearte not only on registers but also on selected memory locations
+- Second, all computers feature explicit *load* and *store* commands designed to
+move data between registers and memory. These memory access commands may use
+several types of *addressing modes* - ways of specifying the address of the
+required memory word.
+    - ***Direct addressing***, The most common way to address the memory is to
+express a specific address or use a symbol that refers to a specific address:
+``` 
+    LOAD R1,67      // R1 <- Memory[67]
+    LOAD R1,bar     // R1 <- Memory[67], assuming bar refers to memory address 67
+```
+    - ***Intermediate addressing***, This form of addressing is used to load
+constants - namely, load values that apper in the instruction code: Instead of
+treating numeric field that appears in the instruction as an address, we simply
+load the value of the field into the register:
+```
+    LOADI R1,67     // R1 <- 67
+```
+    - ***Indirect addressing***, the instruction here specifies a memory location
+that holds the required address. This is used to handle *pointers*.
+```
+    // Translation of x=foo[j] or x=*(foo+j):
+    ADD R1,foo,j    // R1 <- foo + j
+    LOAD* R2,R1     // R2 <- Memory[R1]
+    STR R2,x        // x <- R2
+```
+
+#### Flow of Control
+
