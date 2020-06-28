@@ -79,12 +79,9 @@ bit shifting, and so forth.
 
 #### Memory Access
 Memory access commands fall into two categories:
-- First as we have seen, arithmeitc and logical commands are allowed to
+    - First as we have seen, arithmeitc and logical commands are allowed to
 opearte not only on registers but also on selected memory locations
-- Second, all computers feature explicit *load* and *store* commands designed to
-move data between registers and memory. These memory access commands may use
-several types of *addressing modes* - ways of specifying the address of the
-required memory word.
+    - Second, all computers feature explicit *load* and *store* commands designed to move data between registers and memory. These memory access commands may use several types of *addressing modes* - ways of specifying the address of the required memory word.
 - ***Direct addressing***, The most common way to address the memory is to express a specific address or use a symbol that refers to a specific address:
 ``` 
     LOAD R1,67      // R1 <- Memory[67]
@@ -105,4 +102,17 @@ required memory word.
 ```
 
 #### Flow of Control
+Programs normally execute in a linear fashion but sometimes, they also include
+branches to locations other than the next command. Branching helps with:
+- *repetition*              // jump backwards to the beginning of a loop
+- *conditional execution*   // if a condition is false, jump forward to if-then clause
+- *subroutine calling*      // jump to the first command of some other code segment
 
+To support these programming constructs, every machine language features the means
+ to jump to selected locations in the program, conditionally or unconditionally:
+- *unconditional jump* commands like ***JMP*** or ***beginWhile*** specify only
+the address of the target location.
+- *conditional jump* commands like ***JNG R1*** or ***endWhile*** must also
+specify a Boolean condition expressed in some way. In some languages, the
+condition is an explicit part of the command, and in others it is a by-product of
+executing a previous command.
