@@ -90,10 +90,12 @@ required memory word.
     LOAD R1,67      // R1 <- Memory[67]
     LOAD R1,bar     // R1 <- Memory[67], assuming bar refers to memory address 67
 ```
+
     - ***Intermediate addressing***, This form of addressing is used to load constants - namely, load values that apper in the instruction code: Instead of treating numeric field that appears in the instruction as an address, we simply load the value of the field into the register:
 ```
     LOADI R1,67     // R1 <- 67
 ```
+
     - ***Indirect addressing***, the instruction here specifies a memory location that holds the required address. This is used to handle *pointers*.
 ```
     // Translation of x=foo[j] or x=*(foo+j):
