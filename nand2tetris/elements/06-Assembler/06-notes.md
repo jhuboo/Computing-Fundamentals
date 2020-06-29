@@ -46,7 +46,7 @@ To begin, we will make two arbitrary rules:
 - the translated code will be stored in the computer address starting at address 0
 - variables will be allocated to memory locations starting at address 1024
 - Next, we build a *symbol table*. For each new symbol *xxx* encountered in the source code, we add a line (xxx, n) to the symbol table, where *n* is the memory address associated with the symbol according to the game rules.
-```
+
 | Code with Symbols | Symbol Table | Code with symbols resolved |
 | :--: | :--: | :--: |
 | i = 1 | i  1024 | 00, M[1024]=1  // M=memory |
@@ -58,4 +58,3 @@ To begin, we will make two arbitrary rules:
 | goto loop | | goto 2 |
 | end: | | |
 | goto end | | 06, goto 6 |
-```
