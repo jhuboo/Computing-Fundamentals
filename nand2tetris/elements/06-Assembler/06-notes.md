@@ -49,12 +49,12 @@ To begin, we will make two arbitrary rules:
 
 | Code with Symbols | Symbol Table | Code with symbols resolved |
 | --- | --- | --- |
-| i = 1 | i  1024 | 00, M[1024]=1  // M=memory |
-| sum = 0 | sum  1025 | 01, M[1025]=0 |
+| i = 1 | i  1024 | 00 - M[1024]=1  // M=memory |
+| sum = 0 | sum  1025 | 01 - M[1025]=0 |
 | loop: | | |
-| if i=101 gotoend | loop  2 | 02, if M[1024]=101 goto 6 |
-| sum = sum + i |  | 03, M[1025]=M[1025] 
-| i = i + 1 | | 04, M[1024] = M[1024] + 1 |
-| goto loop | | goto 2 |
+| if i=101 gotoend | loop  2 | 02 - if M[1024]=101 goto 6 |
+| sum = sum + i |  | 03 - M[1025]=M[1025] 
+| i = i + 1 | | 04 - M[1024] = M[1024] + 1 |
+| goto loop | | 05 - goto 2 |
 | end: | | |
-| goto end | end 6 | 06, goto 6 |
+| goto end | end 6 | 06 - goto 6 |
