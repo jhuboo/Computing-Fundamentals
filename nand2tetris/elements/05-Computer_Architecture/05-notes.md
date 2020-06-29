@@ -114,3 +114,7 @@ specified by supplying its address.
                When reset is 1, the execution of the program restarts.
                Thus to start a program execution, reset must be up(1) and then down(0).
 ```
+
+Et voila!
+Historically attempts to enhance the processor's peformance have led to two main
+school of hardware design. Advocates of the *Complex Instruction Set Computing (CISC)* approach argue for achieving better performance by providing rich and elaborate instruction sets. The other school of thought is the *Reduced Instruction Set Computing (RISC)* which argues for simpler instruction sets in order to promote as fast a hardware implementation as possible...
