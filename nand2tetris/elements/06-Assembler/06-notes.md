@@ -58,3 +58,42 @@ To begin, we will make two arbitrary rules:
 | goto loop | | 05 - goto 2 |
 | end: | | |
 | goto end | end 6 | 06 - goto 6 |
+
+#### The Assembler
+The assembler takes as input a stream of assembly commands and generates as output
+a stream of equivalent binary instructions. The resulting code is loaded as is 
+into the computer's memory and executed by the hardware. The assemlber is basially
+a text-processing program, designed to provide translation services. Using the
+*machine language specification*, we can write a program that:
+- Parses the symbolic command into its underlying fields
+- For each field, generate the corresponding bits in the machine language
+- Replace all symbolic references (if any) with numeric addresses of memory locations
+- Assemble the binary codes into a complete machine instruction
+
+| Assembly code (Prog.asm) | Binary code (Prog.hack) |
+| --- | --- |
+| // Adds 1 + ... + 100 | (this line should be erased) |
+| .     @i  | 0000 0000 0001 0000 |
+| .     M=1     // i=1 | 1110 1111 1100 1000 |
+| .     @sum | 0000 0000 0001 0001 |
+| .     M=0     // sum=0 | 1110 1010 1000 1000 |
+| (LOOP) | (this line should be erased) |
+| .     @i | 0000 0000 0001 0000 |
+| .     D=M     // D=i | 1111 1100 0001 0000 |
+| .     @100 | 0000 0000 0110 0100 |
+| .     D=D-A   // D=i-100 | 1110 0100 1101 0000 |
+| .     @END | 0000 0000 0001 0010 |
+| .     D;JGT   // if (i-100)>0 goto END | 1110 0011 0000 0001 |
+| .     @i  | 0000 0000 0001 0000 |
+| .     D=M     // D=i  | 1111 1100 0001 0000 |
+| .     @sum | 0000 0000 0001 0001 |
+| .     M=D+M   // sum=sum+i | 1111  0000 1000 1000 |
+| .     @i  | 0000 0000 0001 0000 |
+| .     M=M+1   // i=i+1 | 1111 1101 1100 1000 |
+| .     @LOOP | 0000 0000 0000 01000 |
+| .     0;JMP   // goto LOOP | 11110 1010 1000 0111 |
+| (END) | (this line should be erased) |
+| .     @END | 0000 0000 0001 0010 |
+| .     0;JMP   // infinte loop | 1110 1010 1000 0111 |
+
+
