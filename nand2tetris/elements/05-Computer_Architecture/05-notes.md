@@ -55,4 +55,62 @@ specified by supplying its address.
     - The practical implications of a memory-mapped I/O architecture are significant. The design of the CPU and the overall platform can be totally independent of the number, nature, or make of the I/O devices that interact or will interact with the computer. When we want to connect a new I/O device, all we have to do is allocate to it a new memory map, and take note of its base address. From this point onward, any program that wants to manipulate this I/O device can do so by manipulating bits in memory.
 
 
+#### CPU of the Hack Platform
+```
+    Chip name: CPU              // Central Processing Unit
+    Inputs   : inM[16],         // M value inputs (M = contents of RAM[A])
+               instructions[16],// Instructions for execution
+               reset            // Resets current program (reset=1) or continue execuiton (reset=0)
+    Outputs  : outM[16],        // M value output
+               writeM,          // Write to M?
+               addressM[15],    // Address of M in data memory
+               pc[15],          // Address of next instruction
+```
 
+#### ROM of the Hack Platform
+```
+    Chip name: ROM32K           // 16-bit read-only 32K memory
+    Input    : address[15]      // Address in the ROM
+    Output   : out[16]          // Value of ROM[address]
+    Function : out=ROM[address] // 16-bit assignment
+```
+
+#### I/O Basics devices of Hack Platform
+```
+    Chip name: Screen           // Memory map of the physical screen
+    Inputs   : in[16],          // What to write
+               load,            // Write-enable bit
+               address[13]      // Where to write
+    Output   : out[16]          // Screen value at the given address
+    Function : out(t) = Screen[address(t)](t)
+               if load(t-1) then Screen[address(t-1)](t) = in(t-1)
+               // It effectively functions exactly like a 16-bit 8K RAM
+               // Has side effect of continously refreshing the screen
+```
+
+```
+    Chip name: Keyboard         // Memory map of the physical keyboard
+                                // Outputs the code of the currently pressed key
+    Output   : out[16]          // ASCII code of pressed key
+    Function : Outputs the code of the key presently pressed on the keyboard
+               // This chip is continously refreshed from a physical keyboard unit
+```
+
+#### Implementation
+```
+    Chip name: Memory           // Complete memory address space
+    Inputs   : in[16],          // What to write
+               load,            // Write-enable bit
+               address[15]      // Where to write
+    Output   : out[16]          // Memory value at the given address
+    Function : out(t) = Memory[address(t)](t)
+               If load(t-1) then Memory[address(t-1)](t) = in(t-1) 
+```
+
+```
+    Chip name: Computer         // Topmost chip of the Hack platform
+    Input    : reset            
+    Funtion  : When reset is 0, the program stored in the computer's ROM executes.
+               When reset is 1, the execution of the program restarts.
+               Thus to start a program execution, reset must be up(1) and then down(0).
+```
