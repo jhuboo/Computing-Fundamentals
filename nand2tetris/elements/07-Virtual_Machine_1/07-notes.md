@@ -40,4 +40,44 @@ The notion of an explict and formal VM language has several pratical advantages.
 - Third, a VM approach also offers modularity. Every improvement in the efficiency of the VM implementations is immediately inherited by all the compilers above it. Likewise, every new device or appliance that is equipped with a VM implementation can immediately benefit from a huge base of available software.
 
 #### The Stack Machine Model
+Like most programming languages, the VM language consists of arithmetic, memory access, program flow and subroutine calling operations. One key question is *where will the operands and the results of the VM operations reside?* The cleanest solution, it seems, would be to put them on a *stack* data structure.
 
+In a *stack machine* model, arithmetic commands pop their operands from the top of the stack and push their results back onto the top of the stack. Other commands transfer data items from the top of the stack to designated memory locations, and vice-versa. It is should be appreciated that any program, written in any programming language, can be translated into an equivalent stack machine.
+
+- ***Elementary Stack Operations***: A stack is an abstract data structure that supports two basic operations: push and pop. Thus a stack implements a LIFO storage model.
+    - One possible way to implement such a data structure is to keep an array, called *stack*, and a *stack pointer* variable, say *sp* that points to the available location just above the topmost element.
+    - Push command: ``` stack[sp]=x; sp=sp+1 ```
+    - Pop  command: ``` sp=sp-1; return stack[sp] ```
+- ***Stack Aritmetic***: The operands are  popped from the stack, and the required operation is performed on them, and the result is pushed back onto the stack. Anyarithmetic and Boolean expression, not matter how complex, can be systematically converted into and evaluated by a sequence of simple operations on a stack. Thus one can write a *compiler* that translates high-level arithmetic and Boolean expressions into sequences of stack commands, as done in chapters 10 and 11.
+
+
+### VM Specification, Part 1
+
+A virtual machine is *stack-based*: all operations are done on a stack. It is also *function-based*: a complete Vm program is oragnized in program units called *functions*, written in the VM language. Each function has its own stand-alone code and is separately handled. The VM languae a single 16, 32 or 64, here 16-bit data type that can be used as an integer, a Boolean, or a pointer. The language consists of four types of commands:
+- *Arithmetic commands* (perform arithmetic and logical operations on the stack)
+- *Memory access commands* (transfer data between stack and Virtual memory segments)
+- *Program flow commands* (facilitate conditional and unconditional branching operations)
+- *Function calling commands* (call functions and return from them)
+
+```
+    // d = (2-x)*(y+5)
+    push 2
+    push x
+    sub
+    push y
+    push 5
+    add
+    mult
+    pop d
+```
+
+```
+    // if (x<7) or (y=8)
+    push x
+    push 7
+    lt
+    push y
+    push 8
+    eq
+    or
+```
