@@ -81,3 +81,21 @@ A virtual machine is *stack-based*: all operations are done on a stack. It is al
     eq
     or
 ```
+
+#### Arithmetic and Logical Commands
+
+The VM languae features 9 stack-oriented arithemtic and logical commands. Seven of these commands are binary. Two of them are unary.
+
+| Command | Return Value | Comment |
+| --- | --- | --- |
+| add | x + y | Integer addition (2's complement) |
+| sub | x - y | Integer subtraction " |
+| neg | -y | Arithmetic negation " |
+| eq  | true if x = y, else false | Equality |
+| gt  | true if x > y, else false | Greater than |
+| lt  | true if x < y, else false | Less than |
+| and | x And y | Bit-wise |
+| or  | x Or y | Bit-wise |
+| not | Not y | Bit-wise |
+
+
