@@ -98,4 +98,18 @@ The VM languae features 9 stack-oriented arithemtic and logical commands. Seven 
 | or  | x Or y | Bit-wise |
 | not | Not y | Bit-wise |
 
+#### Memory Access Commands
 
+So far in the chapter, memory access commands were illustrated using the pseudo commands *pop* or *push x*, where x refered to an individual location in some global memory. Yet formally, our VM manipulates eight separate *virtual memory segments*. All the memory segments are accessed by the same two commands:
+- push *segment index*  Push the value of segment[index] onto the stack
+- pop *segment index* Pop the top stack value and store it in segment[index]
+
+| Segment | Purpose | Comments |
+| --- | --- | --- |
+| argument | Stores the function's arguments | Allocated dynamically by the VM implementation when the function is entered |
+| local | Stores the function's local varialbes | Allocated dynamically by the VM implementation and initialized to 0's when the function is entered |
+| static | Stores staic varialbes shared by all functions in the same .vm file | Allocated by the VM imp. for each .vm file; shared by all functions in the .vm file |
+| constant | Pseudo-segment that holds all the constants in the range 0...32767 | Emulated by the VM implementation; Seen by all the functions in the program |
+| this, that | General-purpose segments. Can be made to correspond to different areas in the heap. Serve various programming needs | Any VM function can use these segments to manipulate selected areas on the heap |
+| pointer | A two-entry segment that holds the base address of the *this* and *that* segments | Any VM function can set *pointer 0 (or 1)* to some address; this has the effect of aligning the *this (or that)* segment to the heap area beginning in that address |
+| temp | Fixed eight-entry segment that holds temporary varialbles for general use | May be used by any VM function for any purpose. Shared by all functions in the program |
