@@ -33,3 +33,5 @@ of how computer worked..."
 | ALU \| Memory Elements |
 | Boolean Arithmetic \| Sequential Logic |
 | Boolean Logic |
+
+One of the most interesting courses I've ever taken :D
