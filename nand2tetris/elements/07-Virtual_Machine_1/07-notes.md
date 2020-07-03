@@ -113,3 +113,22 @@ So far in the chapter, memory access commands were illustrated using the pseudo 
 | this, that | General-purpose segments. Can be made to correspond to different areas in the heap. Serve various programming needs | Any VM function can use these segments to manipulate selected areas on the heap |
 | pointer | A two-entry segment that holds the base address of the *this* and *that* segments | Any VM function can set *pointer 0 (or 1)* to some address; this has the effect of aligning the *this (or that)* segment to the heap area beginning in that address |
 | temp | Fixed eight-entry segment that holds temporary varialbles for general use | May be used by any VM function for any purpose. Shared by all functions in the program |
+
+In addition to the eight memory segments, which are managed explicitly by VM push
+and pop commands, the VM implementation manages two implicit data strutures called
+*stack* and *heap*. These data structures are never mentioned directly, but their
+states change in the background, as a side-effect of VM commands.
+- ***Stack*** - consider the commands sequence *push argument 2* and *pop local 1*. The working memory of such VM operations is the *stack*.
+- ***Heap*** - the *heap* is the name of the RAM area dedicated for storing objets and arrays data.
+
+### Program Flow and Function Calling Commands
+The VM features six additional commands:
+- ***Program Flow Commands***
+    - label *symbol* // label declaration
+    - goto *symbol*  // unconditional branching
+    - if-goto *symbol* // conditional branching
+- ***Function Calling Commands*** (*functionName* is a symbol)
+    - function *functionName nLocals*   // Function declaration, specifying the number of function's local variables
+    - call *functionName nArgs*         // Function invocation, specifying the number of the function's arguments
+    - return                            // Transfer control back to the calling function
+
