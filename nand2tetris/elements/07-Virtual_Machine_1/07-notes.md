@@ -132,3 +132,24 @@ The VM features six additional commands:
     - call *functionName nArgs*         // Function invocation, specifying the number of the function's arguments
     - return                            // Transfer control back to the calling function
 
+### VM Programming Examples
+We will illustrate how the compiler developed in 10 and 11 will use the VM
+abstarction to translate high-level programs into VM code.
+
+When a VM function stars running, it assumes that
+- the stack is empty
+- the argument values on which it is supposed to operate are located in the *argument* segment.
+- the local variables that it is supposed to use are initialized to 0 and located in the *local* segment.
+
+- ***A Typical Arithmetic Task***
+    - Since VM commands cannot use symbolic argument and variable names, they are limited to making <*segment index*> references only. However, the translation of the former to the latter is simple. All we have to do is to map *x, y, sum* and *j* on *argument 0, argument 1, local 0, and local 1*, respectively and replace their symbolic occurences in the pseudo code with corresponding <*segment index*> refs.
+    - ```
+        int mult(int x, int y) {
+            int sum;
+            sum = 0;
+            for (int j = y; j != 0; j--)
+                sum += x;       // Repetitive addition
+            return sum;
+        } ```
+    -    
+
