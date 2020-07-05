@@ -200,9 +200,9 @@ When a VM function stars running, it assumes that
         pop pointer 1       // Set that's base to (bar+2)
         push constant 19
         pop that 0          // *(bar+2)=19
-        ...
+        ...`
 
-- *** Object Handling***
+- ***Object Handling***
     - High-level programmers view objects as entities that encapsulate data (organized as *fields*, or *properties*) and relevant code (organized as *methods*). Yet physically speaking, the data of each object instance is serialized on the RAM as a list of numbers representing the object's field values. Thus the low-level handling of objects is quite similar to that of arrays.
         
     
