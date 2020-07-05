@@ -251,4 +251,30 @@ We recap all the assembly language symbols used by VM implementations that confo
 | Flow of control | The implementation of the VM commands *function, call, label* |
 | symbols | involves generating special label symbols, as discussed in 08 |
 
+### Program Structure
+We propose implementing the VM translator using a main program and two modules: *parser* and *code writer*.
 
+***The Parser Module***
+**Parser:** Handles the parsing of a single .vm file, and encapsulates access to the input code. It reads VM commands, parses them, and provides convenient access to their components. In addition, it removes all white space and comments.
+
+| Routine | Arguments | Returns | Function |
+| :-- | :-- | :-- | :-- |
+| Constructor | Input file/stream | - | Opens the input file/stream and gets readyto parse it |
+| hasMoreCommands | - | Boolean | Are there more commands in the input? |
+| advance | - | - | Reads the next command from the input and makes it the current command. Should be called only if *hasMoreCommands()* is true. Initially there is no current command |
+| commandType | - | C_ARITHMETIC,C_PUSH, ... | Returns the type of the current VM command. C_ARITHMETIC is returned for all the arithmetic commands |
+| arg1 | - | string | Returns the first arg of the current command. |
+| arg2 | - | int | Returns the second arg of the current command. |
+
+***The CodeWriter Module***
+**CodeWriter:** Translates VM commands into Hack assembly code
+
+| Routine | Args | Returns | Function |
+| :-- | :-- | :-- | :-- |
+| Constructor | Output file/stream | - | Opens the output file/stream and gets ready to write into it |
+| setFileName | fileName(string) | - | Informs the code writer that the translation of a new VM file is started |
+| writeArithmetic | command(string) | - | Writes the assembly code that is the translation of the given arithmetic command |
+| WritePushPop | command(C_PUSH or C_POP), segment(string), index(int) | - | Writes teh assembly code that is the translation of the given command |
+| Close | - | - | Closes the output file |
+
+***Main Program*** The main program should construct a *Parser* to parse the VM input file and a *CodeWriter* to generate code into the corresponding output file. It should then march through the VM commands in the input file and generate assembly code for each one of them.
