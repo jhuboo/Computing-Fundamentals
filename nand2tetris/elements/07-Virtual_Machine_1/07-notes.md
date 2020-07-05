@@ -205,5 +205,50 @@ When a VM function stars running, it assumes that
 - ***Object Handling***
     - High-level programmers view objects as entities that encapsulate data (organized as *fields*, or *properties*) and relevant code (organized as *methods*). Yet physically speaking, the data of each object instance is serialized on the RAM as a list of numbers representing the object's field values. Thus the low-level handling of objects is quite similar to that of arrays.
         
-    
+### Implementation
+The VM should be architecture independent - since it should be able to run on all hardware platforms, including those that haven't been built yet.
+
+##### RAM Usage
+| RAM addresses | Usage |
+| --: | :-- |
+| 0-15 | Sixteen virtual registers, usage described below |
+| 16-255 | Static variables (of all the VM functions in the VM program) |
+| 256-2047 | Stack |
+| 2048-16483 | Heap (used to store objets and arrays) |
+| 16384-24575 | Memory mapped I/O |
+
+Recall that according to the *Hack Machine Language Specification*, RAM addresses 0 to 15 can be referred to by any assembly program using the symbols R0 to R15, respectively. In addition, the specification states that assembly programs can refer to RAM addresses 0 to 4 (ie, R0 to R4) using the symbols *SP, LCL, ARG, THIS* and *THAT*. 
+
+| Register | Name | Usage |
+| :-- | :-- | :-- |
+| RAM[0] | SP | Stack Pointer: points to the next topmost location in the stack |
+| RAM[1] | LCL | Points to the base of the current VM function's *local* segment |
+| RAM[2] | ARG | Points to the base of the current VM func's *argument* segment |
+| RAM[3] | THIS | Points to the base of the current *this* segment (within heap) |
+| RAM[4] | THAT | Points to the base of the current *that* segment (within heap) |
+| RAM[5-12]|   | Holds the contents of the *temp* segment |
+| RAM[13-15] |  | Can be used by the VM implementation as general purpose registers|
+
+##### Memory Segments Mapping
+***local, argument, this, that***:  Each of these segments is mapped directly on the RAM, and its location is maintained by keeping its physical base address in a dedicated register (*LCL, ARG, THIS, THAT* respectively). Thus any access to the *i*th entry of any one of those segments should be translated to assembly code that accesses address (*base+i*) in the RAM, where *base* is the current value stored in the register dedicated to the respective segment.
+
+***pointer, temp***: These segments are each mapped directly onto a fixed area in the RAM. The *pointer* segment is mappped on RAM locations 3-4 (also called THIS and THAT) and the *temp* segment on locations 5-12 (also called R5,R6,...,R12). Thus access to pointer *i* should be translated to assembly code that accesses RAM location *3+i* and access to temp *i* should be translated to assembly code that accesses RAM location *5+i*.
+
+***constant***: This segment is truly virtual, as it does not occupy any physical space on the target architecture. Instead the VM implementation handles any VM access to *<constant i>* by simply supplying the constant *i*.
+
+***static***: According to the Hack machine language specification, when a new symbol is encountered for the first time in an assembly program, the assembler allocates a new RAM address to it, starting at address 16.
+
+##### Assembly Language Symbols
+We recap all the assembly language symbols used by VM implementations that conform to the standard mapping.
+
+| Symbol | Usage |
+| :-- | :-- |
+| SP, LCL, ARG | These predefined symbols point, respectively, to the stack |
+| THIS, THAT  | top and to the base addresses of the Virtual segments *local, arguemtn, this* and *that* |
+| R13-R15 | These predefined symbols can be used for any purpose |
+| Xxx.j symbols | Each static variable *j* in file Xxx.vm is translated into the |
+|  | assembly symbol Xxx.j. In the subsequent assembly process, these symbolic varialbes will be allocated RAM space by the assembler |
+| Flow of control | The implementation of the VM commands *function, call, label* |
+| symbols | involves generating special label symbols, as discussed in 08 |
+
 
