@@ -151,7 +151,6 @@ When a VM function stars running, it assumes that
                 sum += x;       // Repetitive addition
             return sum;
         }
-     ```
     - ```
         function mult
             args x, y
@@ -165,7 +164,6 @@ When a VM function stars running, it assumes that
             goto loop
         end:
             return sum    
-    ```
     - ```
         function mult(x, y)     |   function mult 2    // 2 local variables
             push 0              |       push constant 0
@@ -189,7 +187,6 @@ When a VM function stars running, it assumes that
         label end               |   label end
             push sum            |       push local 0
             return              |       return          // return sum
-        ```
 
 - ***Array Handling***
    - An array in an index collection of objects. Suppose that a high-level program has created an array of ten integers called *bar* and filled it with some ten numbers.. Let's assume that the array's base has been mapped (behind the scene) on RAM address 4728. Suppose now that the high level program wants to execute the command *bar[2] = 19*. How can this operation be implemented at the VM level?
@@ -204,7 +201,6 @@ When a VM function stars running, it assumes that
         push constant 19
         pop that 0          // *(bar+2)=19
         ...
-    ```
 
 - *** Object Handling***
     - High-level programmers view objects as entities that encapsulate data (organized as *fields*, or *properties*) and relevant code (organized as *methods*). Yet physically speaking, the data of each object instance is serialized on the RAM as a list of numbers representing the object's field values. Thus the low-level handling of objects is quite similar to that of arrays.
