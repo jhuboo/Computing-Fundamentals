@@ -150,6 +150,64 @@ When a VM function stars running, it assumes that
             for (int j = y; j != 0; j--)
                 sum += x;       // Repetitive addition
             return sum;
-        } ```
-    -    
+        }
+     ```
+    - ```
+        function mult
+            args x, y
+            vars sum, j
+            sum = 0
+            j = y
+        loop:
+            if j = 0 goto end
+            sum = sum + x
+            j = j - 1
+            goto loop
+        end:
+            return sum    
+    ```
+    - ```
+        function mult(x, y)     |   function mult 2    // 2 local variables
+            push 0              |       push constant 0
+            pop sum             |       pop local 0     // sum = 0
+            push y              |       push argument 1
+            pop j               |       pop local 1     // j = y
+        label loop              |   label loop
+            push 0              |       push constant 0
+            push j              |       push local 1
+            eq                  |       Eq
+            if-goto end         |       if-goto end     // if j = 0 goto end
+            push sum            |       push local 0
+            push x              |       push argument 0
+            add                 |       Add
+            pop sum             |       pop local 0     // sum = sum + x
+            push j              |       push local 1
+            push 1              |       push constant 1
+            sub                 |       Sub
+            pop j               |       pop local 1     // j = j - 1
+            goto loop           |       goto loop
+        label end               |   label end
+            push sum            |       push local 0
+            return              |       return          // return sum
+        ```
+
+- ***Array Handling***
+   - An array in an index collection of objects. Suppose that a high-level program has created an array of ten integers called *bar* and filled it with some ten numbers.. Let's assume that the array's base has been mapped (behind the scene) on RAM address 4728. Suppose now that the high level program wants to execute the command *bar[2] = 19*. How can this operation be implemented at the VM level?
+    - In the C language, such an operation can be done as */*(bar+2)=19*
+    - This means *set the RAM location whose address is (bar+2) to 19.* 
+    - ```
+        /* Assume that the bar array is the first local variable declared in the high-level program. The follow VM code implements the operation bar[2] = 19, ie. *(bar+2)=19. */
+        push local 0        // Get bar's base address
+        push constant 2
+        add
+        pop pointer 1       // Set that's base to (bar+2)
+        push constant 19
+        pop that 0          // *(bar+2)=19
+        ...
+    ```
+
+- *** Object Handling***
+    - High-level programmers view objects as entities that encapsulate data (organized as *fields*, or *properties*) and relevant code (organized as *methods*). Yet physically speaking, the data of each object instance is serialized on the RAM as a list of numbers representing the object's field values. Thus the low-level handling of objects is quite similar to that of arrays.
+        
+    
 
