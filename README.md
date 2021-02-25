@@ -1,4 +1,4 @@
-# The_C_Programming_Language
+# Computing Fundamentals
 
 Some notes from The C Programming Language books and the re-construction of some cool c-programs
 
